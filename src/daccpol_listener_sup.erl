@@ -40,10 +40,10 @@ start_link(NbAcceptors, Transport, TransOpts, Protocol, ProtoOpts) ->
 		{daccpol_requests_sup, {daccpol_requests_sup, start_link, []},
 		 permanent, 5000, supervisor, [daccpol_requests_sup]}),
 	{ok, _PoolPid} = supervisor:start_child(SupPid,
-		{daccpol_acceptors_sup, {daccpol_acceptors_sup, start_link, [
+		{daccpol_acceptor_sup, {daccpol_acceptor_sup, start_link, [
 			NbAcceptors, Transport, TransOpts,
 			Protocol, ProtoOpts, ListenerPid, ReqsPid
-		]}, permanent, 5000, supervisor, [daccpol_acceptors_sup]}),
+		]}, permanent, 5000, supervisor, [daccpol_acceptor_sup]}),
 	{ok, SupPid}.
 
 %%%===================================================================

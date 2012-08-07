@@ -1,4 +1,4 @@
--module(Daccpol_sup).
+-module(daccpol_sup).
 
 -behaviour(supervisor).
 

@@ -8,7 +8,7 @@
 %%%-------------------------------------------------------------------
 -module(daccpol_tcp_transport).
 
--export([name/0, messages/0, listen/1, accept/2, recv/3, send/2, setopts/2,
+-export([name/0, messages/0, listen/1, accept/1, recv/3, send/2, setopts/2,
 	controlling_process/2, peername/1, close/1, sockname/1]).
 -export([connect/3]).
 
@@ -54,12 +54,9 @@ listen(Opts) ->
 		end,
 	gen_tcp:listen(Port, ListenOpts).
 
-%% @doc Accept an incoming connection on a listen socket.
-%% @see gen_tcp:accept/2
--spec accept(inet:socket(), timeout())
-	-> {ok, inet:socket()} | {error, closed | timeout | atom()}.
-accept(LSocket, Timeout) ->
-	gen_tcp:accept(LSocket, Timeout).
+
+accept(LSocket) ->
+	gen_tcp:accept(LSocket).
 
 %% @doc Receive a packet from a socket in passive mode.
 %% @see gen_tcp:recv/3

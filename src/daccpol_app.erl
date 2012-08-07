@@ -1,4 +1,4 @@
--module(Daccpol_app).
+-module(daccpol_app).
 
 -behaviour(application).
 
@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    Daccpol_sup:start_link().
+    daccpol_sup:start_link().
 
 stop(_State) ->
     ok.
