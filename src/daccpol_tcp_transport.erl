@@ -45,13 +45,12 @@ connect(Host, Port, Opts) when is_list(Host), is_integer(Port) ->
 listen(Opts) ->
 	{port, Port} = lists:keyfind(port, 1, Opts),
 	Backlog = proplists:get_value(backlog, Opts, 1024),
-	ListenOpts0 = [binary, {active, false},
-		{backlog, Backlog}, {packet, raw}, {reuseaddr, true}],
-	ListenOpts =
-		case lists:keyfind(ip, 1, Opts) of
-			false -> ListenOpts0;
-			Ip -> [Ip|ListenOpts0]
-		end,
+	   Packet = proplists:get_value(packet, Opts, 0),
+    Active = proplists:get_value(active, Opts, false),
+    
+	ListenOpts = [binary, {active, Active},
+		{backlog, Backlog}, {packet, Packet}, {reuseaddr, true}],
+	
 	gen_tcp:listen(Port, ListenOpts).
 
 
